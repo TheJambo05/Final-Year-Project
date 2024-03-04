@@ -15,17 +15,18 @@ import 'package:provider/provider.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart'; // Importing UserState class for defining user-related states
 
 // Class representing the login screen
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key})
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({Key? key})
       : super(key: key); // Corrected the key parameter
 
-  static const String routeName = "login"; // Route name for the login screen
+  static const String routeName =
+      "addProduct"; // Route name for the login screen
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AddProductProvider>(context);

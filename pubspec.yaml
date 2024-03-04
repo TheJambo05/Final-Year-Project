@@ -38,6 +38,12 @@ dependencies:
   dio: ^5.4.1
   pretty_dio_logger: ^1.3.1
   google_fonts: ^6.1.0
+  flutter_bloc: ^8.1.4
+  provider: ^6.1.2
+  email_validator: ^2.1.17
+  cached_network_image: ^3.3.1
+  intl: ^0.19.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +62,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/
+    - assets/Sneaker.png
 
 
   # The following line ensures that the Material Icons font is
