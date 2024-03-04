@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_cubits.dart';
-import 'package:jumper/presentation/screens/auth/add_product_screen.dart';
+import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes.dart';
 import 'logic/cubits/category_cubit/category_cubits.dart';
@@ -27,7 +27,7 @@ class Jumper extends StatelessWidget {
       // Providing multiple BLoC instances at the root of the widget tree
       providers: [
         BlocProvider(
-          create: (context) => ProductCubit(),
+          create: (context) => UserCubit(),
         ),
         BlocProvider(
           create: (context) => CategoryCubit(),
@@ -37,14 +37,14 @@ class Jumper extends StatelessWidget {
         ),
       ],
       child: const MaterialApp(
-        // Root widget of the application
-        debugShowCheckedModeBanner:
-            false, // Disabling debug banner in release mode
-        onGenerateRoute:
-            Routes.onGenerateRoute, // Generating routes using the Routes class
-        initialRoute: AddProductScreen
-            .routeName, // Setting initial route to the LoginScreen
-      ),
+          // Root widget of the application
+          debugShowCheckedModeBanner:
+              false, // Disabling debug banner in release mode
+          onGenerateRoute: Routes
+              .onGenerateRoute, // Generating routes using the Routes class
+          initialRoute:
+              LoginScreen.routeName // Setting initial route to the LoginScreen
+          ),
     );
   }
 }

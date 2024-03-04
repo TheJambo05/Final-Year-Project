@@ -3,7 +3,7 @@ import 'package:email_validator/email_validator.dart'; // Package for email vali
 import 'package:flutter/material.dart'; // Flutter package for building UI
 import 'package:flutter_bloc/flutter_bloc.dart'; // Flutter package for implementing BLoC architecture
 import 'package:jumper/logic/cubits/user_cubit/user_cubits.dart'; // Importing UserCubit class for managing user-related state and business logic
-import 'package:jumper/presentation/screens/auth/admin_screen.dart';
+import 'package:jumper/presentation/screens/auth/home/home_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/login_providers.dart'; // Importing LoginProvider class for managing login functionality
 import 'package:jumper/presentation/screens/auth/signup_screen.dart';
 import 'package:jumper/presentation/screens/auth/splash/splash_screen.dart';
@@ -28,14 +28,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AddProductProvider>(context);
+    final provider = Provider.of<LoginProvider>(context);
 
-    return BlocListener<ProductCubit, UserState>(
+    return BlocListener<UserCubit, UserState>(
       // Listening to state changes in UserCubit
       listener: (context, state) {
-        if (state is ProductAddedState) {
+        if (state is UserLoggedInState) {
           Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacementNamed(context, SplashScreen.routeName);
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         }
       },
       child: Scaffold(

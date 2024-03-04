@@ -20,7 +20,7 @@ class Signupprovider with ChangeNotifier {
   StreamSubscription? _userSubscription;
 
   void _listenToUserCubit() {
-    _userSubscription = BlocProvider.of<ProductCubit>(context).stream.listen(
+    _userSubscription = BlocProvider.of<UserCubit>(context).stream.listen(
       (userState) {
         if (userState is UserLoadingState) {
           isLoading = true; // Setting isLoading to true during loading state
@@ -45,7 +45,7 @@ class Signupprovider with ChangeNotifier {
     if (!formkey.currentState!.validate()) return;
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
-    BlocProvider.of<ProductCubit>(context)
+    BlocProvider.of<UserCubit>(context)
         .createAccount(email: email, password: password);
   }
 

@@ -2,16 +2,16 @@
 import 'package:email_validator/email_validator.dart'; // Package for email validation
 import 'package:flutter/material.dart'; // Flutter package for building UI
 import 'package:flutter_bloc/flutter_bloc.dart'; // Flutter package for implementing BLoC architecture
-import 'package:jumper/logic/cubits/user_cubit/user_cubits.dart'; // Importing UserCubit class for managing user-related state and business logic
-import 'package:jumper/presentation/screens/auth/admin_screen.dart';
-import 'package:jumper/presentation/screens/auth/providers/login_providers.dart'; // Importing LoginProvider class for managing login functionality
+import 'package:jumper/presentation/screens/auth/home/home_screen.dart';
+import 'package:jumper/presentation/screens/auth/providers/add_product_providers.dart';
 import 'package:jumper/presentation/screens/auth/signup_screen.dart';
-import 'package:jumper/presentation/screens/auth/splash/splash_screen.dart';
 import 'package:jumper/presentation/widgets/login_Button.dart'; // Importing custom LoginButton widget
 import 'package:jumper/presentation/widgets/primary_Button.dart'; // Importing custom PrimaryButton widget
 import 'package:jumper/presentation/widgets/primary_Button2.dart'; // Importing custom PrimaryButton2 widget
 import 'package:jumper/presentation/widgets/primary_textfield.dart'; // Importing custom PrimaryTextField widget
 import 'package:provider/provider.dart';
+import '../../../logic/cubits/product_cubit/product_cubits.dart';
+import '../../../logic/cubits/product_cubit/product_state.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart'; // Importing UserState class for defining user-related states
 
 // Class representing the login screen
@@ -19,8 +19,7 @@ class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key})
       : super(key: key); // Corrected the key parameter
 
-  static const String routeName =
-      "addProduct"; // Route name for the login screen
+  static const String routeName = "login"; // Route name for the login screen
 
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
@@ -31,12 +30,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<AddProductProvider>(context);
 
-    return BlocListener<ProductCubit, UserState>(
+    return BlocListener<ProductCubit, ProductState>(
       // Listening to state changes in UserCubit
       listener: (context, state) {
-        if (state is ProductAddedState) {
+        if (state is UserLoggedInState) {
           Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacementNamed(context, SplashScreen.routeName);
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         }
       },
       child: Scaffold(
@@ -72,7 +71,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ),
                     PrimaryTextField(
                       // Text field for email input
-                      controller: provider.emailController,
+                      controller: provider.addProductController,
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
                           return "Email address is required";
@@ -90,13 +89,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     PrimaryTextField(
                       // Text field for password input
-                      controller: provider.passwordController,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Password is required";
-                        }
-                        return null;
-                      },
+                      controller: provider.descriptionController,
                       labelText: "Password",
                       obscureText: true,
                     ),
@@ -105,38 +98,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     LoginButton(
                       // Button for login action
-                      onPressed: provider.logIn,
+                      onPressed: provider.addProduct,
                       text: (provider.isLoading) ? "..." : "Login",
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    PrimaryButton(
-                      // Button for forgot password
-                      onPressed: () {},
-                      text: "Forgot Password",
-                    ),
+
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.20,
                     ),
-                    Row(
-                      // Row for navigation to sign up screen
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Don't have an account?",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        PrimaryButton2(
-                          // Button for navigation to sign up screen
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, SignUpScreen.routeName);
-                          },
-                          text: "Register now",
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),

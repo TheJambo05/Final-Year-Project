@@ -6,8 +6,8 @@ import '../../../data/models/user/user/user_model.dart';
 import '../../services/preferences.dart';
 
 // Cubit class responsible for managing user-related state and business logic
-class ProductCubit extends Cubit<UserState> {
-  ProductCubit() : super(UserInitialState()) {
+class UserCubit extends Cubit<UserState> {
+  UserCubit() : super(UserInitialState()) {
     _initialize();
   }
   final UserRepository _userRepository = UserRepository();
@@ -30,7 +30,7 @@ class ProductCubit extends Cubit<UserState> {
     required String password,
   }) async {
     await Preferences.saveUserDetails(email, password);
-    emit(ProductAddedState(userModel));
+    emit(UserLoggedInState(userModel));
   }
 
   // Method to sign in user

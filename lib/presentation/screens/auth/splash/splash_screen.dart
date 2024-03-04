@@ -17,8 +17,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void goToNextScreeen() {
-    UserState userState = BlocProvider.of<ProductCubit>(context).state;
-    if (userState is ProductAddedState) {
+    UserState userState = BlocProvider.of<UserCubit>(context).state;
+    if (userState is UserLoggedInState) {
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     } else if (userState is UserLoggedOutState) {
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ProductCubit, UserState>(
+    return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
         goToNextScreeen();
       },

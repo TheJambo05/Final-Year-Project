@@ -6,9 +6,9 @@ import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
 import '../../../../logic/cubits/user_cubit/user_cubits.dart';
 
 // Class responsible for providing login functionality and managing state
-class AddProductProvider with ChangeNotifier {
+class LoginProvider with ChangeNotifier {
   final BuildContext context;
-  AddProductProvider(this.context) {
+  LoginProvider(this.context) {
     _listenToUserCubit();
   }
 
@@ -23,7 +23,7 @@ class AddProductProvider with ChangeNotifier {
 
   // Method to listen to changes in the UserCubit
   void _listenToUserCubit() {
-    _userSubscription = BlocProvider.of<ProductCubit>(context).stream.listen(
+    _userSubscription = BlocProvider.of<UserCubit>(context).stream.listen(
       (userState) {
         if (userState is UserLoadingState) {
           isLoading = true; // Setting isLoading to true during loading state
@@ -51,7 +51,7 @@ class AddProductProvider with ChangeNotifier {
         emailController.text.trim(); // Extracting email from text field
     String password =
         passwordController.text.trim(); // Extracting password from text field
-    BlocProvider.of<ProductCubit>(
+    BlocProvider.of<UserCubit>(
             context) // Accessing UserCubit instance and calling signIn method
         .signIn(
             email: email,

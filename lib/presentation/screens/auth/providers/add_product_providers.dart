@@ -1,44 +1,48 @@
 // Importing necessary packages and files
-import 'dart:async'; // Dart package for asynchronous programming
-import 'dart:developer';
-import 'package:flutter/material.dart'; // Flutter package for building UI
-import 'package:flutter_bloc/flutter_bloc.dart'; // Flutter package for implementing BLoC architecture
-import 'package:jumper/logic/cubits/product_cubit/product_cubits.dart';
-import 'package:jumper/logic/cubits/product_cubit/product_state.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
+import '../../../../logic/cubits/product_cubit/product_cubits.dart';
+import '../../../../logic/cubits/product_cubit/product_state.dart';
+import '../../../../logic/cubits/user_cubit/user_cubits.dart';
 
 // Class responsible for providing login functionality and managing state
 class AddProductProvider with ChangeNotifier {
   final BuildContext context;
   AddProductProvider(this.context) {
-    _listenToAddProductCubit();
+    _listenToProductCubit();
   }
 
   bool isLoading = false;
-  String error = "Errorrrrrrrrr";
+  String error = "";
 
-  final newProductController = TextEditingController();
+  final addProductController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
-  final formkey = GlobalKey<FormState>();
-  StreamSubscription? _productSubscription;
+  final formkey =
+      GlobalKey<FormState>(); // GlobalKey for accessing the form state
+  StreamSubscription?
+      _addProductSubscription; // Subscription to user state changes
 
   // Method to listen to changes in the UserCubit
-  void _listenToAddProductCubit() {
-    log("Sandip don dadadadadadad");
-    _productSubscription = BlocProvider.of<ProductCubit>(context).stream.listen(
+  void _listenToProductCubit() {
+    _addProductSubscription =
+        BlocProvider.of<ProductCubit>(context).stream.listen(
       (productState) {
         if (productState is ProductLoadingState) {
-          isLoading = true;
-          error = "";
-          notifyListeners();
+          isLoading = true; // Setting isLoading to true during loading state
+          error = ""; // Clearing any previous error message
+          notifyListeners(); // Notifying listeners of state change
         } else if (productState is ProductErrorState) {
-          isLoading = false;
-          error = productState.message;
-          notifyListeners();
+          isLoading = false; // Setting isLoading to false
+          error =
+              productState.message; // Setting error message received from state
+          notifyListeners(); // Notifying listeners of state change
         } else {
-          isLoading = false;
-          error = "";
-          notifyListeners();
+          isLoading = false; // Setting isLoading to false
+          error = ""; // Clearing any previous error message
+          notifyListeners(); // Notifying listeners of state change
         }
       },
     );
@@ -48,16 +52,22 @@ class AddProductProvider with ChangeNotifier {
   void addProduct() async {
     if (!formkey.currentState!.validate()) return;
 
-    String name = newProductController.text.trim();
+    String name =
+        addProductController.text.trim(); // Extracting email from text field
     String description = descriptionController.text.trim();
-    String price = priceController.text.trim();
-    BlocProvider.of<ProductCubit>(context)
-        .addProduct(name: name, description: description, price: price);
+    String price = descriptionController.text.trim();
+    BlocProvider.of<ProductCubit>(context).addProduct(
+        name: name,
+        description: description,
+        price:
+            price); // Initiating sign-in process with provided email and password
   }
 
+  // Method to clean up resources when the provider is disposed
   @override
   void dispose() {
-    _productSubscription?.cancel();
-    super.dispose();
+    _addProductSubscription
+        ?.cancel(); // Cancelling subscription to user state changes
+    super.dispose(); // Calling super class dispose method
   }
 }

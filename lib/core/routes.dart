@@ -1,13 +1,16 @@
 // Importing necessary packages and files
 import 'package:flutter/cupertino.dart';
-import 'package:jumper/presentation/screens/auth/admin_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/home_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/add_product_providers.dart';
-import 'package:jumper/presentation/screens/auth/providers/login_providers.dart';
 import 'package:jumper/presentation/screens/auth/providers/signup_provider.dart';
+import 'package:jumper/presentation/screens/auth/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
+
 import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:jumper/presentation/screens/auth/signup_screen.dart';
+
+import '../presentation/screens/auth/add_product_screen.dart';
+import '../presentation/screens/auth/providers/login_providers.dart';
 
 class Routes {
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -16,7 +19,7 @@ class Routes {
       case LoginScreen.routeName:
         return CupertinoPageRoute(
           builder: (context) => ChangeNotifierProvider(
-            create: (context) => AddProductProvider(context),
+            create: (context) => LoginProvider(context),
             child: const LoginScreen(),
           ),
         );
@@ -37,18 +40,18 @@ class Routes {
         );
 
       // Route for the Admin screen
-      case AdminScreen.routeName:
+      case AddProductScreen.routeName:
         return CupertinoPageRoute(
           builder: (context) => ChangeNotifierProvider(
-            create: (context) => AddProductProvider(context),
-            child: const AdminScreen(),
+            create: (context) => LoginProvider(context),
+            child: const AddProductScreen(),
           ),
         );
 
       // Route for the Splash screen
-      case AdminScreen.routeName:
+      case SplashScreen.routeName:
         return CupertinoPageRoute(
-          builder: (context) => const AdminScreen(),
+          builder: (context) => const SplashScreen(),
         );
       default:
         return null;
