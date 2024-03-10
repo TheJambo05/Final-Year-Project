@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart'; // Flutter package for implemen
 import 'package:jumper/logic/cubits/user_cubit/user_state.dart'; // Importing UserState class for defining user-related states
 import '../../../../logic/cubits/user_cubit/user_cubits.dart'; // Importing UserCubit class for managing user-related state and business logic
 
-class Signupprovider with ChangeNotifier {
+class SignUpprovider with ChangeNotifier {
   final BuildContext context;
-  Signupprovider(this.context) {
+  SignUpprovider(this.context) {
     _listenToUserCubit();
   }
 

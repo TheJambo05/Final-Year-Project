@@ -1,29 +1,26 @@
 // Importing required packages
-import 'package:dio/dio.dart'; // Package for making HTTP requests
-import 'package:pretty_dio_logger/pretty_dio_logger.dart'; // Package for logging HTTP requests in a pretty format
+import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 // Constants for base URL and default headers
-const String BASE_URL =
-    "http://192.168.1.70:5000/api"; // Base URL for API endpoints
+const String BASE_URL = "http://192.168.1.70:5000/api";
 const Map<String, dynamic> DEFAULT_HEADERS = {
-  'Content-Type': 'application/json' // Default headers for HTTP requests
+  'Content-Type': 'application/json'
 };
 
 // Class responsible for making API requests
 class Api {
-  final Dio _dio = Dio(); // Dio instance for making HTTP requests
+  final Dio _dio = Dio();
 
   // Constructor
   Api() {
-    _dio.options.baseUrl = BASE_URL; // Setting base URL for Dio instance
-    _dio.options.headers =
-        DEFAULT_HEADERS; // Setting default headers for Dio instance
+    _dio.options.baseUrl = BASE_URL;
+    _dio.options.headers = DEFAULT_HEADERS;
     _dio.interceptors.add(PrettyDioLogger(
-        // Adding interceptor for logging requests and responses
-        requestBody: true, // Log request body
-        requestHeader: true, // Log request headers
-        responseBody: true, // Log response body
-        responseHeader: true)); // Log response headers
+        requestBody: true,
+        requestHeader: true,
+        responseBody: true,
+        responseHeader: true));
   }
 
   // Getter for Dio instance

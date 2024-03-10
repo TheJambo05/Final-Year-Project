@@ -17,53 +17,43 @@ class LoginProvider with ChangeNotifier {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final formkey =
-      GlobalKey<FormState>(); // GlobalKey for accessing the form state
-  StreamSubscription? _userSubscription; // Subscription to user state changes
+  final formkey = GlobalKey<FormState>();
+  StreamSubscription? _userSubscription;
 
   // Method to listen to changes in the UserCubit
   void _listenToUserCubit() {
     _userSubscription = BlocProvider.of<UserCubit>(context).stream.listen(
       (userState) {
         if (userState is UserLoadingState) {
-          isLoading = true; // Setting isLoading to true during loading state
-          error = ""; // Clearing any previous error message
-          notifyListeners(); // Notifying listeners of state change
+          isLoading = true;
+          error = "";
+          notifyListeners();
         } else if (userState is UserErrorState) {
-          isLoading = false; // Setting isLoading to false
-          error =
-              userState.message; // Setting error message received from state
-          notifyListeners(); // Notifying listeners of state change
+          isLoading = false;
+          error = userState.message;
+          notifyListeners();
         } else {
-          isLoading = false; // Setting isLoading to false
-          error = ""; // Clearing any previous error message
-          notifyListeners(); // Notifying listeners of state change
+          isLoading = false;
+          error = "";
+          notifyListeners();
         }
       },
     );
   }
 
-  // Method to initiate the login process
   void logIn() async {
     if (!formkey.currentState!.validate()) return;
 
-    String email =
-        emailController.text.trim(); // Extracting email from text field
-    String password =
-        passwordController.text.trim(); // Extracting password from text field
-    BlocProvider.of<UserCubit>(
-            context) // Accessing UserCubit instance and calling signIn method
-        .signIn(
-            email: email,
-            password:
-                password); // Initiating sign-in process with provided email and password
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    BlocProvider.of<UserCubit>(context)
+        .signIn(email: email, password: password);
   }
 
   // Method to clean up resources when the provider is disposed
   @override
   void dispose() {
-    _userSubscription
-        ?.cancel(); // Cancelling subscription to user state changes
-    super.dispose(); // Calling super class dispose method
+    _userSubscription?.cancel();
+    super.dispose();
   }
 }

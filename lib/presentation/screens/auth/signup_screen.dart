@@ -19,7 +19,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<Signupprovider>(context);
+    final provider = Provider.of<SignUpprovider>(context);
     return Scaffold(
       body: SafeArea(
         child: Form(

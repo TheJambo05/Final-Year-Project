@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/logic/cubits/add_Product_cubit.dart/add_product_cubit.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_cubits.dart';
 import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,20 +12,21 @@ import 'logic/cubits/user_cubit/user_cubits.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences instance = await SharedPreferences.getInstance();
-  instance.clear();
+
+  // preferences wala code
+  // SharedPreferences instance = await SharedPreferences.getInstance();
+  // instance
+  //     .clear(); // Remove this line if you don't want to clear SharedPreferences on app start
   Bloc.observer = MyBlocObserver();
   runApp(const Jumper());
 }
 
-// Main Jumper app widget
 class Jumper extends StatelessWidget {
-  const Jumper({super.key});
+  const Jumper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      // Providing multiple BLoC instances at the root of the widget tree
       providers: [
         BlocProvider(
           create: (context) => UserCubit(),
@@ -35,16 +37,15 @@ class Jumper extends StatelessWidget {
         BlocProvider(
           create: (context) => ProductCubit(),
         ),
+        // BlocProvider(
+        //   create: (context) => AddProductCubit(),
+        // ),
       ],
       child: const MaterialApp(
-          // Root widget of the application
-          debugShowCheckedModeBanner:
-              false, // Disabling debug banner in release mode
-          onGenerateRoute: Routes
-              .onGenerateRoute, // Generating routes using the Routes class
-          initialRoute:
-              LoginScreen.routeName // Setting initial route to the LoginScreen
-          ),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: Routes.onGenerateRoute,
+        initialRoute: LoginScreen.routeName,
+      ),
     );
   }
 }
