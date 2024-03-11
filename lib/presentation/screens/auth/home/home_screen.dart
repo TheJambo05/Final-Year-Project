@@ -18,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     UserFeedScreen(),
     CategoryScreen(),
-    ProfileScreen(),
-    // AddProductScreen()
+    // ProfileScreen(),
+    AddProductScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.category), label: "Categories"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          // BottomNavigationBarItem(
-          //     icon: Icon(Icons.admin_panel_settings), label: "Admin"),
+          // BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.admin_panel_settings), label: "Admin"),
         ],
       ),
     );

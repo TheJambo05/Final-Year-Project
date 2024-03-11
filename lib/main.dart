@@ -2,11 +2,11 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jumper/logic/cubits/add_Product_cubit.dart/add_product_cubit.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_cubits.dart';
 import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes.dart';
+import 'logic/cubits/cart_cuibit/cart_cubit.dart';
 import 'logic/cubits/category_cubit/category_cubits.dart';
 import 'logic/cubits/user_cubit/user_cubits.dart';
 
@@ -37,9 +37,9 @@ class Jumper extends StatelessWidget {
         BlocProvider(
           create: (context) => ProductCubit(),
         ),
-        // BlocProvider(
-        //   create: (context) => AddProductCubit(),
-        // ),
+        BlocProvider(
+          create: (context) => CartCubit(BlocProvider.of<UserCubit>(context)),
+        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
