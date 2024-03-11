@@ -1,9 +1,10 @@
 // Importing necessary packages and files
 import 'package:flutter/cupertino.dart';
-import 'package:jumper/data/models/user/product/product_model.dart';
+import 'package:jumper/data/models/product/product_model.dart';
 import 'package:jumper/presentation/screens/auth/products/product_details_screen.dart';
 import 'package:provider/provider.dart';
 import '../presentation/screens/auth/add_product_screen.dart';
+import '../presentation/screens/auth/cart/cart_screen.dart';
 import '../presentation/screens/auth/home/home_screen.dart';
 import '../presentation/screens/auth/login_screen.dart';
 import '../presentation/screens/auth/signup_screen.dart';
@@ -60,6 +61,11 @@ class Routes {
           builder: (context) => ProductDetailsScreen(
             productModel: settings.arguments as ProductModel,
           ),
+        );
+
+      case CartScreen.routeName:
+        return CupertinoPageRoute(
+          builder: (context) => const CartScreen(),
         );
       default:
         return null;

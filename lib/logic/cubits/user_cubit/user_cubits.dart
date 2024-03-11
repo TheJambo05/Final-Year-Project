@@ -2,7 +2,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/data/repositories/user_repository.dart';
 import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
-import '../../../data/models/user/user/user_model.dart';
+import '../../../data/models/user/user_model.dart';
 
 // Cubit class responsible for managing user-related state and business logic
 class UserCubit extends Cubit<UserState> {

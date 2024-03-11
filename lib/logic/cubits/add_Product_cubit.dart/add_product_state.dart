@@ -1,5 +1,5 @@
 // Importing user model for user-related data
-import '../../../data/models/user/product/product_model.dart';
+import '../../../data/models/product/product_model.dart';
 
 abstract class AddProductState {}
 

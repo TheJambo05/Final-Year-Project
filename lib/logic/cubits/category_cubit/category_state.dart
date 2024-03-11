@@ -1,4 +1,4 @@
-import '../../../data/models/user/category/category_model.dart';
+import '../../../data/models/category/category_model.dart';
 
 abstract class CategoryState {
   final List<CategoryModel> categories;

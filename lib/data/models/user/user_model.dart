@@ -2,6 +2,7 @@ class UserModel {
   String? sId;
   String? fullName;
   String? email;
+  bool? isadmin;
   String? password;
   String? phoneNumber;
   String? address;
@@ -16,6 +17,7 @@ class UserModel {
       {this.sId,
       this.fullName,
       this.email,
+      this.isadmin,
       this.password,
       this.phoneNumber,
       this.address,
@@ -30,6 +32,7 @@ class UserModel {
     sId = json['_id'];
     fullName = json['fullName'];
     email = json['email'];
+    isadmin = json['isadmin'];
     password = json['password'];
     phoneNumber = json['phoneNumber'];
     address = json['address'];
@@ -46,6 +49,7 @@ class UserModel {
     data['_id'] = this.sId;
     data['fullName'] = this.fullName;
     data['email'] = this.email;
+    data['isadmin'] = this.isadmin;
     data['password'] = this.password;
     data['phoneNumber'] = this.phoneNumber;
     data['address'] = this.address;

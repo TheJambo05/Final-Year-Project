@@ -1,5 +1,5 @@
 // product_state.dart
-import 'package:jumper/data/models/user/product/product_model.dart';
+import 'package:jumper/data/models/product/product_model.dart';
 
 abstract class ProductState {
   final List<ProductModel> products;

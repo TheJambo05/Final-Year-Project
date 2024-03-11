@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../logic/cubits/user_cubit/user_cubits.dart';
 
 // Class responsible for providing login functionality and managing state
@@ -14,6 +15,7 @@ class LoginProvider with ChangeNotifier {
 
   bool isLoading = false;
   String error = "";
+  late SharedPreferences prefs;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

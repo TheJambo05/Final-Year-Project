@@ -2,7 +2,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:jumper/core/api.dart';
-import 'package:jumper/data/models/user/user/user_model.dart';
+import 'package:jumper/data/models/user/user_model.dart';
 
 class UserRepository {
   final _api = Api();

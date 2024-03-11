@@ -2,7 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:jumper/core/api.dart';
-import 'package:jumper/data/models/user/category/category_model.dart';
+import 'package:jumper/data/models/category/category_model.dart';
 
 class CategoryRepository {
   final _api = Api();

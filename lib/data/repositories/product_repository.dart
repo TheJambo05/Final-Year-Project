@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:jumper/core/api.dart';
-import '../models/user/product/product_model.dart';
+import '../models/product/product_model.dart';
 
 // Class responsible for interacting with the user-related APIs
 class ProductRepository {

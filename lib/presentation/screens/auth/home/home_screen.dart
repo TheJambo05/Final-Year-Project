@@ -1,5 +1,6 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:jumper/presentation/screens/auth/cart/cart_screen.dart";
 import "package:jumper/presentation/screens/auth/home/profile_screen.dart";
 import "package:jumper/presentation/screens/auth/home/user_feed_screen.dart";
 import "../add_product_screen.dart";
@@ -17,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     UserFeedScreen(),
     CategoryScreen(),
-    // ProfileScreen(),
-    AddProductScreen()
+    ProfileScreen(),
+    // AddProductScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Jumper"),
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(CupertinoIcons.cart_fill)),
+              onPressed: () {
+                Navigator.pushNamed(context, CartScreen.routeName);
+              },
+              icon: const Icon(CupertinoIcons.cart_fill)),
         ],
       ),
       body: screens[currentIndex],
@@ -42,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.category), label: "Categories"),
-          // BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.admin_panel_settings), label: "Admin"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.admin_panel_settings), label: "Admin"),
         ],
       ),
     );
