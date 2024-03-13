@@ -8,7 +8,7 @@ import '../../widgets/primary_Button2.dart';
 import '../../widgets/primary_textfield.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  const SignUpScreen({Key? key}) : super(key: key);
 
   static const String routeName = "signUp";
 
@@ -19,11 +19,11 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<SignUpprovider>(context);
+    final provider = Provider.of<SignUpProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Form(
-          key: provider.formkey, // Using form key for form validation
+          key: provider.formKey, // Using form key for form validation
           child: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -33,7 +33,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.20,
                   ),
-
                   (provider.error != "") // Displaying error message if any
                       ? Row(
                           children: [
@@ -53,6 +52,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 30, fontWeight: FontWeight.bold),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  PrimaryTextField(
+                    // Text field for full name input
+                    controller: provider.fullNameController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "Full name is required";
+                      }
+                      return null;
+                    },
+                    labelText: "Full Name",
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
@@ -91,15 +104,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   PrimaryTextField(
-                    // Text field for password input
+                    // Text field for confirm password input
                     controller: provider.cPasswordController,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return "Confirm is required";
+                        return "Confirm password is required";
                       }
                       if (value.trim() !=
                           provider.passwordController.text.trim()) {
-                        return "Password do not match";
+                        return "Passwords do not match";
                       }
                       return null;
                     },
@@ -109,20 +122,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.03,
                   ),
+                  PrimaryTextField(
+                    // Text field for phone number input
+                    controller: provider.phoneNumberController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "Phone number is required";
+                      }
+                      // Add phone number validation logic here if needed
+                      return null;
+                    },
+                    labelText: "Phone Number",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  PrimaryTextField(
+                    // Text field for address input
+                    controller: provider.addressController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "Address is required";
+                      }
+                      return null;
+                    },
+                    labelText: "Address",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  PrimaryTextField(
+                    // Text field for city input
+                    controller: provider.cityController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "City is required";
+                      }
+                      return null;
+                    },
+                    labelText: "City",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
+                  ),
                   LoginButton(
-                    // Button for login action
+                    // Button for create account action
                     onPressed: provider.createAccount,
                     text: (provider.isLoading) ? "..." : "Create Account",
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),
-
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.20,
                   ),
                   Row(
-                    // Row for navigation to sign up screen
+                    // Row for navigation to login screen
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
@@ -130,11 +185,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(fontSize: 14),
                       ),
                       PrimaryButton2(
-                        // Button for navigation to sign up screen
+                        // Button for navigation to login screen
                         onPressed: () {
                           Navigator.pushNamed(context, LoginScreen.routeName);
                         },
-                        text: "log In",
+                        text: "Log In",
                       ),
                     ],
                   )

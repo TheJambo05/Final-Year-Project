@@ -1,11 +1,9 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:jumper/presentation/screens/auth/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jumper/presentation/screens/auth/providers/add_product_provider.dart';
-import 'package:jumper/presentation/screens/auth/providers/signup_provider.dart';
+import 'package:jumper/presentation/widgets/gap_widget.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/login_Button.dart';
-import '../../widgets/primary_Button2.dart';
 import '../../widgets/primary_textfield.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -27,13 +25,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
           key: provider.formKey, // Using form key for form validation
           child: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
               child: Column(
                 children: [
-                  const Text("Jumper"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
                   const Row(
                     children: [
                       Text(
@@ -44,28 +38,67 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
+                    height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   PrimaryTextField(
                     controller: provider.titleController,
                     labelText: "Name of Product",
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "(Write your product name.)",
+                        style: GoogleFonts.roboto(
+                          textStyle: const TextStyle(color: Colors.black),
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
+                    height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   PrimaryTextField(
                     // Text field for password input
                     controller: provider.descriptionController,
-
                     labelText: "Description",
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "(Describe your product briefly to showcase its features and benefits.)",
+                    style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(color: Colors.black),
+                      fontSize: 15,
+                    ),
+                  ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
+                    height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   PrimaryTextField(
                     // Text field for password input
                     controller: provider.priceController,
                     labelText: "Price",
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "(Enter the price of your product.)",
+                        style: GoogleFonts.roboto(
+                          textStyle: const TextStyle(color: Colors.black),
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.03,

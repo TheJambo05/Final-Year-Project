@@ -1,14 +1,19 @@
-import "package:cached_network_image/cached_network_image.dart";
-import "package:flutter/material.dart";
-import "package:flutter_carousel_slider/carousel_slider.dart";
-import "package:jumper/presentation/widgets/gap_widget.dart";
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:jumper/logic/cubits/cart_cuibit/cart_cubit.dart';
+import 'package:jumper/presentation/widgets/gap_widget.dart';
 import '../../../../data/models/product/product_model.dart';
-import "../../../../logic/services/formatter.dart";
-import "../../../widgets/login_Button.dart";
+import '../../../../logic/services/formatter.dart';
+import '../../../widgets/login_Button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productModel;
-  const ProductDetailsScreen({super.key, required this.productModel});
+
+  const ProductDetailsScreen({Key? key, required this.productModel})
+      : super(key: key);
 
   static const routeName = "product_details";
 
@@ -21,58 +26,91 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.productModel.title}"),
+        title: Text(
+          "${widget.productModel.title}",
+          style: GoogleFonts.poppins(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SafeArea(
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.width,
-              child: CarouselSlider.builder(
-                itemCount: widget.productModel.images?.length ?? 0,
-                slideBuilder: (index) {
-                  String url = widget.productModel.images![index];
-
-                  return CachedNetworkImage(
-                    imageUrl: url,
-                  );
-                },
-              ),
-            ),
-            const GapWidget(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(16),
                 children: [
-                  Text("${widget.productModel.title}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 25)),
+                  SizedBox(
+                    height: 300,
+                    child: CarouselSlider.builder(
+                      itemCount: widget.productModel.images?.length ?? 0,
+                      slideBuilder: (index) {
+                        return CachedNetworkImage(
+                          imageUrl:
+                              "https://i.pinimg.com/564x/09/7c/a0/097ca0b428754128c164b4fc5e050982.jpg",
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "Price",
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   Text(
                     Formatter.formatPrice(widget.productModel.price!),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
                   ),
-                  const GapWidget(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LoginButton(
-                        // Button for login action
-                        onPressed: () {},
-                        text: "Add to Cart",
-                      ),
-                    ],
+                  const SizedBox(height: 24),
+                  LoginButton(
+                    onPressed: () {
+                      BlocProvider.of<CartCubit>(context)
+                          .addToCart(widget.productModel, 1);
+                    },
+                    text: "Add to Cart",
                   ),
-                  const GapWidget(),
-                  const Text(
+                  const SizedBox(height: 24),
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 0.5,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
                     "Description",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     "${widget.productModel.description}",
-                    style: const TextStyle(fontSize: 15),
-                  )
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
                 ],
               ),
             ),

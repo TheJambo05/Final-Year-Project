@@ -73,4 +73,21 @@ class ProductRepository {
       rethrow;
     }
   }
+
+  ///// deleteProduct
+  Future<bool> deleteProduct(String productId) async {
+    try {
+      Response response = await _api.sendRequest.delete("/product/$productId");
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return true;
+    } catch (ex) {
+      rethrow;
+    }
+  }
 }

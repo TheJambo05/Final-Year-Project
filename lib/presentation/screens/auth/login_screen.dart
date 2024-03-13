@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Column(
                 children: [
-                  const Text("Jumper"), // Title of the app
+                  // Title of the app
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.20,
                   ),
@@ -67,6 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       : SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02,
                         ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
                   PrimaryTextField(
                     // Text field for email input
                     controller: provider.emailController,
@@ -105,16 +108,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: provider.logIn,
                     text: (provider.isLoading) ? "..." : "Login",
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
-                  ),
+
                   PrimaryButton(
                     // Button for forgot password
                     onPressed: () {},
                     text: "Forgot Password",
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.20,
+                    height: MediaQuery.of(context).size.height * 0.15,
                   ),
                   Row(
                     // Row for navigation to sign up screen

@@ -1,13 +1,12 @@
-// Importing necessary packages and files
-import 'dart:async'; // Dart package for asynchronous programming
-import 'package:flutter/material.dart'; // Flutter package for building UI
-import 'package:flutter_bloc/flutter_bloc.dart'; // Flutter package for implementing BLoC architecture
-import 'package:jumper/logic/cubits/user_cubit/user_state.dart'; // Importing UserState class for defining user-related states
-import '../../../../logic/cubits/user_cubit/user_cubits.dart'; // Importing UserCubit class for managing user-related state and business logic
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
+import '../../../../logic/cubits/user_cubit/user_cubits.dart';
 
-class SignUpprovider with ChangeNotifier {
+class SignUpProvider with ChangeNotifier {
   final BuildContext context;
-  SignUpprovider(this.context) {
+  SignUpProvider(this.context) {
     _listenToUserCubit();
   }
 
@@ -16,21 +15,27 @@ class SignUpprovider with ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+  final fullNameController =
+      TextEditingController(); // New controller for full name
+  final phoneNumberController =
+      TextEditingController(); // New controller for phone number
+  final addressController =
+      TextEditingController(); // New controller for address
+  final cityController = TextEditingController(); // New controller for city
+  final formKey = GlobalKey<FormState>();
   StreamSubscription? _userSubscription;
 
   void _listenToUserCubit() {
     _userSubscription = BlocProvider.of<UserCubit>(context).stream.listen(
       (userState) {
         if (userState is UserLoadingState) {
-          isLoading = true; // Setting isLoading to true during loading state
-          error = ""; // Clearing any previous error message
-          notifyListeners(); // Notifying listeners of state change
+          isLoading = true;
+          error = "";
+          notifyListeners();
         } else if (userState is UserErrorState) {
-          isLoading = false; // Setting isLoading to false
-          error =
-              userState.message; // Setting error message received from state
-          notifyListeners(); // Notifying listeners of state change
+          isLoading = false;
+          error = userState.message;
+          notifyListeners();
         } else {
           isLoading = false;
           error = "";
@@ -40,20 +45,30 @@ class SignUpprovider with ChangeNotifier {
     );
   }
 
-  // Method to initiate the login process
   void createAccount() async {
-    if (!formkey.currentState!.validate()) return;
+    if (!formKey.currentState!.validate()) return;
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
-    BlocProvider.of<UserCubit>(context)
-        .createAccount(email: email, password: password);
+    String fullName =
+        fullNameController.text.trim(); // Retrieve full name from controller
+    String phoneNumber = phoneNumberController.text
+        .trim(); // Retrieve phone number from controller
+    String address =
+        addressController.text.trim(); // Retrieve address from controller
+    String city = cityController.text.trim(); // Retrieve city from controller
+    BlocProvider.of<UserCubit>(context).createAccount(
+      email: email,
+      password: password,
+      fullName: fullName, // Pass full name to createAccount method
+      phoneNumber: phoneNumber, // Pass phone number to createAccount method
+      address: address, // Pass address to createAccount method
+      city: city, // Pass city to createAccount method
+    );
   }
 
-  // Method to clean up resources when the provider is disposed
   @override
   void dispose() {
-    _userSubscription
-        ?.cancel(); // Cancelling subscription to user state changes
-    super.dispose(); // Calling super class dispose method
+    _userSubscription?.cancel();
+    super.dispose();
   }
 }

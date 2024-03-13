@@ -47,6 +47,10 @@ class AddProductProvider with ChangeNotifier {
     String price = priceController.text.trim();
     BlocProvider.of<ProductCubit>(context)
         .addProduct(title: title, description: description, price: price);
+
+    titleController.clear();
+    descriptionController.clear();
+    priceController.clear();
   }
 
   @override

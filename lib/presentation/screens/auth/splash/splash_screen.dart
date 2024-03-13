@@ -36,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(milliseconds: 100), () {
       goToNextScreeen();
     });
+     
     goToNextScreeen();
   }
 
