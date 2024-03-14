@@ -36,7 +36,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SafeArea(
         child: Column(
@@ -56,8 +56,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               "https://i.pinimg.com/564x/09/7c/a0/097ca0b428754128c164b4fc5e050982.jpg",
                           fit: BoxFit.cover,
                           placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => const Icon(
                             Icons.error,
                             color: Colors.red,
                           ),

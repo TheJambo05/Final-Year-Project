@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class PrimaryTextField extends StatelessWidget {
+class CategoryField extends StatelessWidget {
   final String labelText;
-  final String? placeholder;
+  final String? placeholder; // Added placeholder parameter
   final TextEditingController? controller;
   final bool obscureText;
   final String? Function(String?)? validator;
-  final IconData? icon;
+  final IconData? icon; // Added icon parameter
 
-  const PrimaryTextField({
+  const CategoryField({
     Key? key,
     required this.labelText,
-    this.placeholder,
+    this.placeholder, // Added placeholder parameter
     this.controller,
     this.obscureText = false,
     this.validator,
@@ -29,7 +29,7 @@ class PrimaryTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         labelText: labelText,
-        hintText: placeholder,
+        hintText: placeholder, // Utilizing the placeholder parameter
         prefixIcon: icon != null ? Icon(icon) : null,
       ),
     );

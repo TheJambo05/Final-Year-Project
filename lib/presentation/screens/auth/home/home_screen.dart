@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jumper/presentation/screens/auth/cart/cart_screen.dart';
+import 'package:jumper/presentation/screens/auth/home/order_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/product_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/user_feed_screen.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     UserFeedScreen(),
     ProductScreen(),
-    CategoryScreen(),
+    OrderScreen(),
     AddProductScreen()
   ];
 
@@ -33,23 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white, // Set app bar color to white
-        actions: [
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 8, 65, 8),
-                child: Text(
-                  'Jumper',
-                  style: GoogleFonts.atma(
-                    textStyle: const TextStyle(color: Colors.black),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
-                ),
-              ),
-            ],
+        centerTitle: true, // Center the title
+        title: Text(
+          'Jumper',
+          style: GoogleFonts.atma(
+            textStyle: const TextStyle(color: Colors.black),
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
           ),
-
+        ),
+        actions: [
           // Search button
           IconButton(
             onPressed: () {},
@@ -58,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black, // Set search icon color to black
             ),
           ),
-
           // Cart button
           IconButton(
             onPressed: () {
@@ -92,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           FloatingNavbarItem(icon: Icons.home, title: 'Home'),
           FloatingNavbarItem(icon: Icons.shopping_bag, title: 'Products'),
-          FloatingNavbarItem(icon: Icons.category, title: 'Categories'),
+          FloatingNavbarItem(icon: Icons.shopping_cart, title: 'Orders'),
           FloatingNavbarItem(icon: Icons.admin_panel_settings, title: 'Admin'),
         ],
         currentIndex: currentIndex,
