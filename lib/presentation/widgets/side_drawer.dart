@@ -13,7 +13,7 @@ class SideDrawer extends StatelessWidget {
         children: <Widget>[
           UserAccountsDrawerHeader(
             accountName: const Text(
-              'John Doe', // Replace with user's name
+              'Hello, Sandip Magar', // Replace with user's name
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20.0,

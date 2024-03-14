@@ -88,6 +88,8 @@ class _ProductScreenState extends State<ProductScreen> {
                     childAspectRatio: 0.75,
                   ),
                   itemCount: state.products.length,
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
                   itemBuilder: (context, index) {
                     final product = state.products[index];
 
