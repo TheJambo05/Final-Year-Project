@@ -1,7 +1,10 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jumper/logic/cubits/cart_cuibit/cart_cubit.dart';
+import 'package:jumper/logic/cubits/cart_cuibit/cart_state.dart';
 import 'package:jumper/presentation/screens/auth/cart/cart_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/order_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/product_screen.dart';
@@ -72,10 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
               // );
               Navigator.pushNamed(context, CartScreen.routeName);
             },
-            icon: const Icon(
-              CupertinoIcons.cart_fill,
-              color: Colors.black, // Set cart icon color to black
-            ),
+            icon: BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+              return Badge(
+                label: Text("${state.items.length}"),
+                isLabelVisible: (state is CartLoadingState) ? false : true,
+                child: const Icon(
+                  CupertinoIcons.cart_fill,
+                  color: Colors.black, // Set cart icon color to black
+                ),
+              );
+            }),
           ),
         ],
       ),

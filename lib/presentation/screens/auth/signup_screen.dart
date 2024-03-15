@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:jumper/presentation/screens/auth/login_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/signup_provider.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/login_Button.dart';
-import '../../widgets/primary_Button2.dart';
-import '../../widgets/primary_textfield.dart';
+import '../../widgets/small_widgets/login_Button.dart';
+import '../../widgets/small_widgets/primary_Button2.dart';
+import '../../widgets/small_widgets/primary_textfield.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);

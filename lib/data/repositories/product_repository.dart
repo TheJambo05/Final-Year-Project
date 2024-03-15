@@ -48,6 +48,27 @@ class ProductRepository {
     }
   }
 
+  // Fetch products by category ID
+  Future<List<ProductModel>> fetchProductsByCategoryId(
+      String categoryId) async {
+    try {
+      Response response =
+          await _api.sendRequest.get("/products/category/$categoryId");
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return (apiResponse.data as List<dynamic>)
+          .map((json) => ProductModel.fromJson(json))
+          .toList();
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
 /////addProduct
   Future<ProductModel> addProduct(
       {required String title,

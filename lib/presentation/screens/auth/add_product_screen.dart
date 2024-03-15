@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jumper/presentation/screens/auth/providers/add_product_provider.dart';
-import 'package:jumper/presentation/widgets/primary_textfield2.dart';
+import 'package:jumper/presentation/widgets/small_widgets/primary_textfield2.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/login_Button.dart';
+import '../../widgets/small_widgets/login_Button.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key}) : super(key: key);

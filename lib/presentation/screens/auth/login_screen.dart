@@ -6,10 +6,10 @@ import 'package:jumper/logic/cubits/user_cubit/user_cubits.dart';
 import 'package:jumper/presentation/screens/auth/home/home_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/login_providers.dart';
 import 'package:jumper/presentation/screens/auth/signup_screen.dart';
-import 'package:jumper/presentation/widgets/login_Button.dart';
+import 'package:jumper/presentation/widgets/small_widgets/login_Button.dart';
 import 'package:jumper/presentation/widgets/primary_Button.dart';
-import 'package:jumper/presentation/widgets/primary_Button2.dart';
-import 'package:jumper/presentation/widgets/primary_textfield.dart';
+import 'package:jumper/presentation/widgets/small_widgets/primary_Button2.dart';
+import 'package:jumper/presentation/widgets/small_widgets/primary_textfield.dart';
 import 'package:provider/provider.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
 

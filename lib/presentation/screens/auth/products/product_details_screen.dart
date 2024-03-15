@@ -1,13 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jumper/data/models/product/product_model.dart';
 import 'package:jumper/logic/cubits/cart_cuibit/cart_cubit.dart';
-import 'package:jumper/presentation/widgets/gap_widget.dart';
-import '../../../../data/models/product/product_model.dart';
+import 'package:jumper/presentation/widgets/small_widgets/login_Button.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_carousel_slider/carousel_slider.dart';
 import '../../../../logic/services/formatter.dart';
-import '../../../widgets/login_Button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productModel;
@@ -22,6 +21,8 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  bool _productAdded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +88,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     onPressed: () {
                       BlocProvider.of<CartCubit>(context)
                           .addToCart(widget.productModel, 1);
+                      setState(() {
+                        _productAdded = true;
+                      });
                     },
-                    text: "Add to Cart",
+                    text: _productAdded ? "Product Added" : "Add to Cart",
+                    color: _productAdded ? Colors.green : null,
                   ),
                   const SizedBox(height: 24),
                   const Divider(

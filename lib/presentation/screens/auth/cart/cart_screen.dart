@@ -6,9 +6,9 @@ import 'package:jumper/logic/cubits/cart_cuibit/cart_cubit.dart';
 import 'package:jumper/logic/cubits/cart_cuibit/cart_state.dart';
 import 'package:jumper/logic/services/calculations.dart';
 import 'package:jumper/logic/services/formatter.dart';
-import 'package:jumper/presentation/widgets/color.dart';
+import 'package:jumper/presentation/widgets/small_widgets/color.dart';
 
-import '../../../widgets/login_Button.dart';
+import '../../../widgets/small_widgets/login_Button.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key); // Added key parameter
@@ -47,6 +47,11 @@ class _CartScreenState extends State<CartScreen> {
                   style:
                       const TextStyle(color: Colors.red), // Error message color
                 ),
+              );
+            }
+            if (state is CartLoadedState && state.items.isEmpty) {
+              return const Center(
+                child: Text("Cart item will show here..."),
               );
             }
             return Container(

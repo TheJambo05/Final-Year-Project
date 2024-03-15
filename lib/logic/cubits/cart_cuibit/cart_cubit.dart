@@ -30,11 +30,17 @@ class CartCubit extends Cubit<CartState> {
 
   final _cartRepository = CartRepository();
 
+  void sortAndLoad(List<CartItemModel> items) {
+    items.sort((a, b) => b.product!.title!.compareTo(a.product!.title!));
+
+    emit(CartLoadedState(items));
+  }
+
   void _initialize(String userId) async {
     emit(CartLoadingState(state.items));
     try {
       final items = await _cartRepository.fetchCartForUser(userId);
-      emit(CartLoadedState(items));
+      sortAndLoad(items);
     } catch (ex) {
       emit(CartErrorState(ex.toString(), state.items));
     }
@@ -49,7 +55,7 @@ class CartCubit extends Cubit<CartState> {
             CartItemModel(product: product, quantity: quantity);
         final items =
             await _cartRepository.addToCart(newItem, userState.userModel.sId!);
-        emit(CartLoadedState(items));
+        sortAndLoad(items);
       } else {
         throw "An error occurred while adding the item";
       }
@@ -65,7 +71,8 @@ class CartCubit extends Cubit<CartState> {
 
         final items = await _cartRepository.removeFromCart(
             userState.userModel.sId!, product.sId!);
-        emit(CartLoadedState(items));
+
+        sortAndLoad(items);
       } else {
         throw "An error occurred while removing the item";
       }
