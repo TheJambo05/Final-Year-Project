@@ -20,16 +20,16 @@ class Preferences {
     };
   }
 
-  static Future<void> saveToken(String token) async {
-    SharedPreferences instance = await SharedPreferences.getInstance();
-    await instance.setString("token", token);
-    log("Token saved");
-  }
+//   static Future<void> saveToken(String token) async {
+//     SharedPreferences instance = await SharedPreferences.getInstance();
+//     await instance.setString("token", token);
+//     log("Token saved");
+//   }
 
-  static Future<String?> fetchToken() async {
-    SharedPreferences instance = await SharedPreferences.getInstance();
-    return instance.getString("token");
-  }
+//   static Future<String?> fetchToken() async {
+//     SharedPreferences instance = await SharedPreferences.getInstance();
+//     return instance.getString("token");
+//   }
 
   static Future<void> clear() async {
     SharedPreferences instance = await SharedPreferences.getInstance();

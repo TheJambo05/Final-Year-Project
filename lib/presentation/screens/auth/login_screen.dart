@@ -6,12 +6,13 @@ import 'package:jumper/logic/cubits/user_cubit/user_cubits.dart';
 import 'package:jumper/presentation/screens/auth/home/home_screen.dart';
 import 'package:jumper/presentation/screens/auth/providers/login_providers.dart';
 import 'package:jumper/presentation/screens/auth/signup_screen.dart';
+import 'package:jumper/presentation/screens/auth/splash/splash_screen.dart';
 import 'package:jumper/presentation/widgets/small_widgets/login_Button.dart';
-import 'package:jumper/presentation/widgets/primary_Button.dart';
 import 'package:jumper/presentation/widgets/small_widgets/primary_Button2.dart';
 import 'package:jumper/presentation/widgets/small_widgets/primary_textfield.dart';
 import 'package:provider/provider.dart';
 import '../../../logic/cubits/user_cubit/user_state.dart';
+import '../../widgets/small_widgets/primary_button.dart';
 
 // Class representing the login screen
 class LoginScreen extends StatefulWidget {
@@ -33,8 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Listening to state changes in UserCubit
       listener: (context, state) {
         if (state is UserLoggedInState) {
-          Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          Navigator.pushReplacementNamed(context, SplashScreen.routeName);
         }
       },
       child: Scaffold(

@@ -1,4 +1,10 @@
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:jumper/data/models/user/user_model.dart";
+import "package:jumper/logic/cubits/user_cubit/user_cubits.dart";
+import "package:jumper/logic/cubits/user_cubit/user_state.dart";
+import "package:jumper/presentation/screens/auth/user/edit_profile_screen.dart";
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -10,6 +16,60 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.red);
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is UserLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is UserErrorState) {
+          return Center(
+            child: Text(state.message),
+          );
+        }
+        if (state is UserLoggedInState) {
+          return userProfile(state.userModel);
+        }
+        return const Center(
+          child: Text("An error occured"),
+        );
+      },
+    );
+  }
+
+  Widget userProfile(UserModel userModel) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("${userModel.fullName}"),
+            Text("${userModel.email}"),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, EditProfileScreen.routeName);
+                },
+                child: const Text("Edit Profile"))
+          ],
+        ),
+        const Divider(),
+        ListTile(
+          onTap: () {},
+          contentPadding: EdgeInsets.zero,
+          leading: const Icon(CupertinoIcons.cube_box_fill),
+          title: const Text("My orders"),
+        ),
+        ListTile(
+          onTap: () {
+            BlocProvider.of<UserCubit>(context).signOut();
+          },
+          contentPadding: EdgeInsets.zero,
+          leading: const Icon(Icons.exit_to_app, color: Colors.red),
+          title: const Text("Sign out"),
+        )
+      ],
+    );
   }
 }

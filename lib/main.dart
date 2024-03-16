@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/product_cubit/product_cubits.dart';
 import 'package:jumper/presentation/screens/auth/login_screen.dart';
+import 'package:jumper/presentation/screens/auth/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes.dart';
 import 'logic/cubits/cart_cuibit/cart_cubit.dart';
@@ -15,8 +16,7 @@ void main() async {
 
   // preferences wala code
   // SharedPreferences instance = await SharedPreferences.getInstance();
-  // instance
-  //     .clear(); // Remove this line if you don't want to clear SharedPreferences on app start
+  // instance.clear();
   Bloc.observer = MyBlocObserver();
   runApp(const Jumper());
 }
@@ -44,7 +44,7 @@ class Jumper extends StatelessWidget {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Routes.onGenerateRoute,
-        initialRoute: LoginScreen.routeName,
+        initialRoute: SplashScreen.routeName,
       ),
     );
   }

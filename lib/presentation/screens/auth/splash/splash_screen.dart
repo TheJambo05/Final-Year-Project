@@ -1,16 +1,16 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jumper/logic/cubits/user_cubit/user_cubits.dart';
 import 'package:jumper/logic/cubits/user_cubit/user_state.dart';
-
 import '../home/home_screen.dart';
 import '../login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
   static const String routeName = "splash";
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(milliseconds: 100), () {
       goToNextScreeen();
     });
-     
+
     goToNextScreeen();
   }
 
