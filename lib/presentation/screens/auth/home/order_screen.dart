@@ -7,6 +7,8 @@ import "package:jumper/logic/cubits/category_cubit/category_state.dart";
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
 
+  static const routeName = "order_screen";
+
   @override
   State<OrderScreen> createState() => _OrderScreenState();
 }

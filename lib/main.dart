@@ -37,8 +37,10 @@ class Jumper extends StatelessWidget {
         BlocProvider(
           create: (context) => ProductCubit(),
         ),
+        // Fixing the initialization of CartCubit
         BlocProvider(
           create: (context) => CartCubit(BlocProvider.of<UserCubit>(context)),
+          lazy: false,
         ),
       ],
       child: const MaterialApp(
@@ -60,7 +62,7 @@ class MyBlocObserver extends BlocObserver {
 
   @override
   void onChange(BlocBase bloc, Change change) {
-    log("Change in $bloc: $Change");
+    log("Change in $bloc: $change"); // Corrected typo here
     super.onChange(bloc, change);
   }
 

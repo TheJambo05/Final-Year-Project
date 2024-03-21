@@ -11,6 +11,12 @@ class ProductCubit extends Cubit<ProductState> {
 
   final ProductRepository _productRepository = ProductRepository();
 
+// void sortAndLoad(List<ProductModel> items) {
+//     items.sort((a, b) => b.product!.title!.compareTo(a.product!.title!));
+
+//     emit(ProductLoadedState(items));
+// }
+
   void addProduct({
     required String title,
     required String description,
