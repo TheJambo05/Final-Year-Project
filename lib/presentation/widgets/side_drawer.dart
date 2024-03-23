@@ -93,7 +93,10 @@ class SideDrawer extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).pop(); // Close the dialog
                               },
-                              child: const Text("No"),
+                              child: const Text(
+                                "No",
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
                             TextButton(
                               onPressed: () {
@@ -104,7 +107,10 @@ class SideDrawer extends StatelessWidget {
                                   (route) => false,
                                 );
                               },
-                              child: const Text("Yes"),
+                              child: const Text(
+                                "Yes",
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
                           ],
                         );

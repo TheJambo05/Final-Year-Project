@@ -13,6 +13,7 @@ import 'package:jumper/presentation/screens/auth/home/product_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/profile_screen.dart';
 import 'package:jumper/presentation/screens/auth/home/user_feed_screen.dart';
 import 'package:jumper/presentation/screens/auth/login_screen.dart';
+import 'package:jumper/presentation/screens/auth/order/order_detail_screen.dart';
 import 'package:jumper/presentation/screens/auth/splash/splash_screen.dart';
 import 'package:jumper/presentation/widgets/side_drawer.dart';
 import '../add_product_screen.dart';
@@ -32,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     UserFeedScreen(),
     ProductScreen(),
-    OrderScreen(),
+    OrderDetailScreen(),
+    // OrderScreen(),
     ProfileScreen(),
     // AddProductScreen()
   ];
@@ -108,8 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
             FloatingNavbarItem(icon: Icons.home, title: 'Home'),
             FloatingNavbarItem(icon: Icons.shopping_bag, title: 'Products'),
             FloatingNavbarItem(icon: Icons.shopping_cart, title: 'Orders'),
-            FloatingNavbarItem(
-                icon: Icons.admin_panel_settings, title: 'Admin'),
+            FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
+            // FloatingNavbarItem(
+            //     icon: Icons.admin_panel_settings, title: 'Admin'),
           ],
           currentIndex: currentIndex,
           onTap: (index) {

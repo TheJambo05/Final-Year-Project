@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes.dart';
 import 'logic/cubits/cart_cuibit/cart_cubit.dart';
 import 'logic/cubits/category_cubit/category_cubits.dart';
+import 'logic/cubits/order_cubit/order_cubit.dart';
 import 'logic/cubits/user_cubit/user_cubits.dart';
 
 void main() async {
@@ -40,7 +41,13 @@ class Jumper extends StatelessWidget {
         // Fixing the initialization of CartCubit
         BlocProvider(
           create: (context) => CartCubit(BlocProvider.of<UserCubit>(context)),
-          lazy: false,
+          // lazy: false,
+        ),
+
+        BlocProvider(
+          create: (context) => OrderCubit(BlocProvider.of<UserCubit>(context),
+              BlocProvider.of<CartCubit>(context)),
+          // lazy: false,
         ),
       ],
       child: const MaterialApp(

@@ -89,7 +89,10 @@ class CartListView extends StatelessWidget {
                                   Navigator.of(context)
                                       .pop(); // Close the dialog
                                 },
-                                child: const Text("No"),
+                                child: const Text(
+                                  "No",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -99,7 +102,10 @@ class CartListView extends StatelessWidget {
                                   Navigator.of(context)
                                       .pop(); // Close the dialog
                                 },
-                                child: const Text("Yes"),
+                                child: const Text(
+                                  "Yes",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                             ],
                           );

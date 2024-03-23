@@ -6,6 +6,8 @@ import 'package:jumper/data/models/product/product_model.dart';
 import 'package:jumper/logic/cubits/category_product_cubit/category_product_cubit.dart';
 import 'package:jumper/presentation/screens/auth/home/order_screen.dart';
 import 'package:jumper/presentation/screens/auth/order/order_detail_screen.dart';
+import 'package:jumper/presentation/screens/auth/order/order_placed_screen.dart';
+import 'package:jumper/presentation/screens/auth/providers/order_detail_provider.dart';
 import 'package:jumper/presentation/screens/auth/products/category_product_screen.dart';
 import 'package:jumper/presentation/screens/auth/products/product_details_screen.dart';
 import 'package:jumper/presentation/screens/auth/user/edit_profile_screen.dart';
@@ -52,9 +54,15 @@ class Routes {
       // Route for the Home screen
       case HomeScreen.routeName:
         return CupertinoPageRoute(
-          builder: (context) => ChangeNotifierProvider(
-              create: (context) => AddProductProvider(context),
-              child: const HomeScreen()),
+          builder: (context) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                  create: (context) => AddProductProvider(context)),
+              ChangeNotifierProvider(
+                  create: (context) => OrderDetailProvider()),
+            ],
+            child: const HomeScreen(),
+          ),
         );
 
       // Route for the Splash screen
@@ -82,13 +90,21 @@ class Routes {
 
       case OrderDetailScreen.routeName:
         return CupertinoPageRoute(
-          builder: (context) => const OrderDetailScreen(),
+          builder: (context) => ChangeNotifierProvider(
+              create: (context) => OrderDetailProvider(),
+              child: const OrderDetailScreen()),
         );
 
       case OrderScreen.routeName:
         return CupertinoPageRoute(
           builder: (context) => const OrderScreen(),
         );
+
+      case OrderPlacedScreen.routeName:
+        return CupertinoPageRoute(
+          builder: (context) => const OrderPlacedScreen(),
+        );
+
       case CategoryProductScreen.routeName:
         return CupertinoPageRoute(
           builder: (context) => BlocProvider(
